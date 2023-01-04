@@ -1,0 +1,22 @@
+<div class="p-4 text-center bg-light float">
+    <button routerLink="/addplayer" class="container" na>Add Player</button>
+    <h4 class="mb-3">Player Details</h4>
+</div>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let player of players" [class.active-row]="player === selectedPlayer" (click)="onSelect(player)">
+            <td>{{player.id}}</td>
+            <td>{{player.name}}</td>
+        </tr>
+    </tbody>
+</table>
+<app-winrate
+    [gamePlayers]="gameplayers"></app-winrate>

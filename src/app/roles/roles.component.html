@@ -1,0 +1,29 @@
+<app-script-selection 
+    *ngIf="!isScriptSelected; else scriptSelected"
+    (selectedScript)="onScriptSelected($event)"></app-script-selection>
+<ng-template #scriptSelected>
+    <div class="p-4 text-center bg-light float">
+        <button class="container" (click) = "chooseDifferentScript()">Choose Other Script</button>
+        <h4 class="mb-3">Role Details</h4>
+    </div>
+    <div class="page-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Role Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of roles" [class.active-row]="role === selectedRole" (click)="onSelect(role)">
+                    <td>{{role.id}}</td>
+                    <td>{{role.name}}</td>
+                    <td>{{role.roleType}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <app-winrate
+        [gamePlayers]="gameplayers"></app-winrate>
+    </div>
+</ng-template>

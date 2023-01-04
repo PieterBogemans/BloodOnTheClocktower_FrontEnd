@@ -1,0 +1,17 @@
+button {
+  font-family: sans-serif;
+  float: none;
+  width: fit-content;
+  margin: 10px;
+}
+
+.float {
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:center;
+}
+
+.float h4 {
+  flex-grow:1;       /* take up rest of line */
+  text-align:center; /* centre text in p */
+}

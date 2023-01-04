@@ -1,0 +1,51 @@
+<div class="p-4 text-center bg-light float">
+    <h4 class="mb-3">Game Details</h4>
+</div>
+<table class="styled-table" *ngIf="game != null">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Story Teller</th>
+            <th>Script</th>
+            <th>Winning Alignment</th>
+            <th>Player Count</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{game.id}}</td>
+            <td>{{game.storyTeller.name}}</td>
+            <td>{{game.script.name}}</td>
+            <td>{{game.winningAlignment}}</td>
+            <td>{{game.players.length}}</td>
+            <td>{{game.date | date: 'dd-MM-yyyy HH:mm'}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="p-4 text-center bg-light float">
+    <h4 class="mb-3">Player Details</h4>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Player</th>
+            <th>Role</th>
+            <th>Alignment</th>
+            <th>Won</th>
+            <th>Died</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let gamePlayer of gamePlayers">
+            <td>{{gamePlayer.id}}</td>
+            <td>{{gamePlayer.player.name}}</td>
+            <td>{{gamePlayer.role.name}}</td>
+            <td>{{gamePlayer.alignment}}</td>
+            <td>{{gamePlayer.won}}</td>
+            <td>{{gamePlayer.died}}</td>
+        </tr>
+    </tbody>
+</table>

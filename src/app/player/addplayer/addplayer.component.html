@@ -1,0 +1,18 @@
+<div class="p-4 text-center bg-light float">
+    <h4 class="mb-3">Add New Player</h4>
+</div>
+<form (ngSubmit)="onSubmit()" #playerForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+             required
+             [(ngModel)]="model.name" name="name"
+             #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+           class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Submit</button>
+</form>

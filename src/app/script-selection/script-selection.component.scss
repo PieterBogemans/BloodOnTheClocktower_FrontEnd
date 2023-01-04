@@ -1,0 +1,21 @@
+.container {
+    max-width: 200px;
+    min-height: 200px;
+    text-align: center; // aligns text in the middle horizontally
+    display: flex; // aligns text in the middle vertically
+    align-items: center; // aligns text in the middle vertically
+    color: #444;
+    transition: background-color 1s;
+}
+
+.container:hover {
+    background-color: #009879;
+}     
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    flex-wrap: wrap;
+}

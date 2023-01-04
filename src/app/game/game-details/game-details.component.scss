@@ -1,0 +1,14 @@
+table {
+    margin: auto;
+    margin-top: 20px;
+}
+
+
+
+.styled-table tbody tr:hover {
+    background-color: #dddddd !important;
+} 
+  
+.styled-table tbody tr:nth-of-type(even):hover {
+    background-color: #f3f3f3 !important;
+}
