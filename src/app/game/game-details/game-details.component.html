@@ -17,7 +17,8 @@
             <td>{{game.id}}</td>
             <td>{{game.storyTeller.name}}</td>
             <td>{{game.script.name}}</td>
-            <td>{{game.winningAlignment}}</td>
+            <td *ngIf="game.winningAlignment === 'GOOD'; else playerEvil">😇 Good</td>
+            <ng-template #playerEvil><td>😈 Evil</td></ng-template>
             <td>{{game.players.length}}</td>
             <td>{{game.date | date: 'dd-MM-yyyy HH:mm'}}</td>
         </tr>
@@ -43,9 +44,12 @@
             <td>{{gamePlayer.id}}</td>
             <td>{{gamePlayer.player.name}}</td>
             <td>{{gamePlayer.role.name}}</td>
-            <td>{{gamePlayer.alignment}}</td>
-            <td>{{gamePlayer.won}}</td>
-            <td>{{gamePlayer.died}}</td>
+            <td *ngIf="gamePlayer.alignment === 'GOOD'; else playerEvil">😇 Good</td>
+            <ng-template #playerEvil><td>😈 Evil</td></ng-template>
+            <td *ngIf="gamePlayer.won; else playerLost">🏆 Won</td>
+            <ng-template #playerLost><td>🏳️ Lost</td></ng-template>
+            <td *ngIf="gamePlayer.died; else playerAlive"> 💀 Died</td>
+            <ng-template #playerAlive><td>❤️ Alive</td></ng-template>
         </tr>
     </tbody>
 </table>
