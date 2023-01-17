@@ -10,14 +10,12 @@
         <table class="styled-table">
             <thead>
                 <tr>
-                    <th>id</th>
                     <th>Name</th>
                     <th>Role Type</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let role of roles" [class.active-row]="role === selectedRole" (click)="onSelect(role)">
-                    <td>{{role.id}}</td>
                     <td>{{role.name}}</td>
                     <td>{{role.roleType}}</td>
                 </tr>

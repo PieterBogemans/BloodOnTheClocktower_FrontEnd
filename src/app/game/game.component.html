@@ -4,7 +4,6 @@
 <table class="styled-table">
     <thead>
         <tr>
-            <th>id</th>
             <th>Story Teller</th>
             <th>Script</th>
             <th>Winning Alignment</th>
@@ -15,10 +14,10 @@
     <tbody>
         
         <tr *ngFor="let game of games" [class.active-row]="game === selectedGame" (click)="onSelect(game)">
-            <td>{{game.id}}</td>
             <td>{{game.storyTeller.name}}</td>
             <td>{{game.script.name}}</td>
-            <td>{{game.winningAlignment}}</td>
+            <td *ngIf="game.winningAlignment === 'GOOD'; else playerEvil">😇 Good</td>
+            <ng-template #playerEvil><td>😈 Evil</td></ng-template>
             <td>{{game.players.length}}</td>
             <td>{{game.date | date: 'dd-MM-yyyy HH:mm'}}</td>
         </tr>
