@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Role } from "./roles";
 
 export const ROLES: Role[] = [
     { id: 1, name:'Imp', startingAlignment: 'EVIL', roleType: 'DEMON' },

@@ -5,12 +5,12 @@ import { Script } from "../script-selection/script";
 
 export class Game {
     constructor (
-    public id: number,
-    public storyTeller: Player,
-    public date: Date,
-    public winningAlignment: String,
-    public players: GamePlayer[],
-    public script: Script
+        public storyTeller: Player,
+        public winningAlignment: String,
+        public players: GamePlayer[],
+        public script: Script,
+        public date?: Date,
+        public id?: number
     
     ) {}
 }

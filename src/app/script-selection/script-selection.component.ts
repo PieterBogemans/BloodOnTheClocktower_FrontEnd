@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Script } from './script';
 import { ClockTowerData } from '../config/data';
+import ScriptService from './script.service';
 
 
 @Component({
@@ -14,8 +15,8 @@ export class ScriptSelectionComponent implements OnInit {
   scripts:any;
   @Output() selectedScript = new EventEmitter<Script>;
 
-  constructor(private data: ClockTowerData) {
-  }
+  constructor(private data: ClockTowerData, service: ScriptService) {}
+
   ngOnInit(): void {
     this.getScripts();
   }

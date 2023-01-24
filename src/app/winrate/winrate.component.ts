@@ -18,7 +18,7 @@ export class WinrateComponent implements OnInit {
   dataAvailable = false;
   total: number = 0;
   @Input()
-  gamePlayers: GamePlayer[] = [];
+  gamePlayers?: GamePlayer[] = [];
   
   constructor() { 
     this.chart = this.createChart(false);
@@ -32,19 +32,20 @@ export class WinrateComponent implements OnInit {
     let won = 0;
     this.total = 0;
     this.data = [0, 0]
-    
-    for (var gamePlayer of this.gamePlayers) {
-      if (gamePlayer.won) {
-        won++;
-        this.data[0]++;
-      } else {
-        this.data[1]++;
+    if (this.gamePlayers !== undefined) {
+      for (var gamePlayer of this.gamePlayers) {
+        if (gamePlayer.won) {
+          won++;
+          this.data[0]++;
+        } else {
+          this.data[1]++;
+        }
+        this.total++;
       }
-      this.total++;
+      this.dataAvailable = this.total != 0;
+      this.winrate = Math.round(won / this.total * 10000) / 100;
+      this.chart = this.createChart(true);
     }
-    this.dataAvailable = this.total != 0;
-    this.winrate = Math.round(won / this.total * 10000) / 100;
-    this.chart = this.createChart(true);
   }
 
   createChart(destroy: Boolean): Chart {

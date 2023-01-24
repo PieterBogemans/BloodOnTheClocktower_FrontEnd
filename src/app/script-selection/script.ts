@@ -1,9 +1,9 @@
-import { Role } from "../roles/role";
+import { Role } from "../roles/roles";
 
 export class Script {
     constructor (
-    public id: number,
-    public name: string,
-    public roles: Role[]
+        public name: string,
+        public roles: Role[],
+        public id?: number
     ) {}
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from './player';
 import { GamePlayer } from '../game/game-player';
+import PlayerService from './player.service';
+import { ClockTowerData } from '../config/data';
 
 @Component({
   selector: 'app-player',
@@ -22,36 +24,30 @@ export class PlayerComponent implements OnInit {
     headers: this.headers     
   };
 
-  players:any;
   selectedPlayer?: Player;
-  gameplayers: any = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private service: PlayerService,
+              private data: ClockTowerData) {
     this.http = http;
   }
 
   ngOnInit(): void {
-    this.getPlayers();
+    this.service.getPlayers();
   }
 
   onSelect(player: Player): void {
     this.selectedPlayer = player;
-    this.getGamePlayers();
-    
+    this.data.selectedPlayer = player;
+    this.service.getGamePlayers();
   }
 
-  getPlayers() {
-    this.http.get('/api/player', this.requestOptions).subscribe(data => {
-      this.players = data;
-      if (this.players.length != 0) this.onSelect(this.players[0]);
-    });
+  get players() {
+    return this.data.players;
   }
 
-  getGamePlayers() {
-    this.http.post<Object>('/api/player/gameplayers', this.selectedPlayer, this.requestOptions).subscribe(data => {
-      this.gameplayers = data;
-    });
-    console.log(this.gameplayers);
+  get gameplayers() {
+    return this.data.gamePlayers;
   }
 
 }

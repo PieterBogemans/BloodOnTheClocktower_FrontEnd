@@ -1,0 +1,89 @@
+<div class="p-4 text-center bg-light float">
+    <h4 class="mb-3">Add New Game</h4>
+</div>
+<div class="page-container">
+    <div class="container">
+        <form (ngSubmit)="onSubmit()" #playerForm="ngForm">
+            <div class="form-group">
+                <label for="selectStoryTeller">Story Teller</label>
+                <select id="selectStoryTeller" [(ngModel)]="game.storyTeller" class="btn dropdown-toggle form-control" name="player" required>
+                    <option *ngFor="let player of players" [ngValue]="player">{{ player.name }}</option>
+                </select>
+            </div>
+            <div class="form-group dropdown">
+                <label for="selectScript">Script</label>
+                <select id="selectScript" [attr.disabled]="hasGamePlayers ? '': null" [(ngModel)]="game.script" (ngModelChange)="scriptOnChange()" class="btn dropdown-toggle form-control" name="script" required>
+                    <option *ngFor="let script of scripts" [ngValue]="script">{{ script.name }}</option>
+                </select>
+            </div>
+            <div class="form-group dropdown">
+                <label for="selectScript">Who won</label>
+                <select id="selectScript" [(ngModel)]="game.winningAlignment" (ngModelChange)="winningAlignmentOnChange()" class="btn dropdown-toggle form-control" name="winningAlignment" required>
+                    <option [ngValue]="'GOOD'">😇 Good</option>
+                    <option [ngValue]="'EVIL'">😈 Evil</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Add Game</button>
+            </div>
+        </form>
+        <table class="styled-table" *ngIf="hasGamePlayers">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Role</th>
+                    <th>Alignment</th>
+                    <th>Won</th>
+                    <th>Died</th>
+                    <th>Remove Player</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gamePlayer of game.players">
+                    <td>{{gamePlayer.player.name}}</td>
+                    <td>{{gamePlayer.role.name}}</td>
+                    <td *ngIf="gamePlayer.alignment === 'GOOD'; else playerEvil">😇 Good</td>
+                    <ng-template #playerEvil><td>😈 Evil</td></ng-template>
+                    <td *ngIf="gamePlayer.won; else playerLost">🏆 Won</td>
+                    <ng-template #playerLost><td>🏳️ Lost</td></ng-template>
+                    <td *ngIf="gamePlayer.died; else playerAlive"> 💀 Died</td>
+                    <ng-template #playerAlive><td>❤️ Alive</td></ng-template>
+                    <td><button class="trash" (click)="removePlayer(gamePlayer)">🗑️</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container" *ngIf="isScriptSelected">
+        <form (ngSubmit)="addPlayer()" #playerForm="ngForm">
+            <div class="form-group">
+                <label for="selectPlayer">Player</label>
+                <select id="selectPlayer" [(ngModel)]="gamePlayer.player" class="btn dropdown-toggle form-control" name="player" required>
+                    <option *ngFor="let player of players" [ngValue]="player">{{ player.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectRole">Role</label>
+                <select id="selectRole" [(ngModel)]="gamePlayer.role" class="btn dropdown-toggle form-control" name="role" required>
+                    <option *ngFor="let role of roles" [ngValue]="role">{{ role.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="alignment">Final Alignment</label>
+                <select id="alignment" [(ngModel)]="gamePlayer.alignment" class="btn dropdown-toggle form-control" name="alignment" required>
+                    <option [ngValue]="'GOOD'">😇 Good</option>
+                    <option [ngValue]="'EVIL'">😈 Evil</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="died">Were they alive?</label>
+                <select id="died" [(ngModel)]="gamePlayer.died" class="btn dropdown-toggle form-control" name="died" required>
+                    <option [ngValue]="false">❤️ Alive</option>
+                    <option [ngValue]="true">💀 Died</option>
+                </select>
+            </div>
+            <div class="float">
+                <button type="submit" class="btn btn-success" [disabled]="!playerForm.form.valid">Add Player</button>
+            </div>
+        </form>
+    </div>
+</div>

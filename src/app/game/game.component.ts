@@ -10,19 +10,7 @@ import { Game } from './game';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-
-  formData = {"username": "user", "password": "password"};
-
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin':'*',
-    'Authorization': 'Basic ' + btoa('user:password')
-  });
-
-  requestOptions = { 
-    headers: this.headers     
-  };
-
+  
   games:any;
   selectedGame?: Game;
   gameplayers: any = [];
@@ -35,7 +23,7 @@ export class GameComponent implements OnInit {
   }
 
   getPlayers() {
-    this.http.get('/api/game', this.requestOptions).subscribe(data => {
+    this.http.get('/api/game', this.data.requestOptions).subscribe(data => {
       this.games = data;
     });
   }

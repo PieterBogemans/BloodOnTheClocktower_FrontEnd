@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Role } from './role';
+import { Role } from './roles';
 import { Script } from '../script-selection/script';
 import { ClockTowerData } from '../config/data';
 
@@ -25,7 +25,6 @@ export class RolesComponent implements OnInit {
 
   onSelect(role: Role): void {
     this.selectedRole = role;
-    console.log(role);
     this.getGamePlayers();
   }
 
